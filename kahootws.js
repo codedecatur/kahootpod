@@ -3,6 +3,8 @@ const WebSocket = require("ws");
 function kahootws(wss){
     var clients = [];
 
+    console.log("here!")
+
     wss.on("connection", (ws) => {
         clients.push(ws);
 
