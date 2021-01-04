@@ -17,6 +17,9 @@ app.get("/test", (req, res) => {
   res.render("pages/slides/title");
 })
 
+app.get("/admin/bassoon", (req, res) => {
+  res.render("pages/admin");
+})
 
 var privateKey = fs.readFileSync( 'privatekey.pem' );
 var certificate = fs.readFileSync( 'certificate.pem' );

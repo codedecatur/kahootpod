@@ -10,12 +10,27 @@
 <script>
     var kws = new WebSocket("wss://kahootpod.com:443/kws");
 
+    var currentPrompt = "Welcome to KahootPod: The Game!"
+
     console.log("hello!");
 
     console.log(kws);
 
     kws.onmessage = (e) => {
-        console.log(e.data);
+        try{
+            let msgJSON = JSON.parse(e.data);
+            switch(msgJSON.type){
+                case "prompt":
+                    currentPrompt = msgJSON.content;
+
+            }
+        } catch (e) {
+            kws.close();
+        } 
+    }
+
+    function answerQuestion(ans){
+        ws.send(JSON.stringify({type: "answer", content: ans}));
     }
 </script>
 </html>
