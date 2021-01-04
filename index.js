@@ -4,6 +4,7 @@ const WebSocket = require('ws');
 const fs = require('fs');
 const https = require('https');
 const url = require("url");
+const { kahootws } = require("./kahootws");
 
 let app = express();
 app.set('view engine', 'ejs');
@@ -26,6 +27,7 @@ const server = https.createServer({
 }, app).listen(443)
 
 const wss = new WebSocket.Server({ noServer: true });
+const kWss = new WebSocket.Server({ noServer: true });
 
 server.on('upgrade', function upgrade(request, socket, head) {
   const pathname = url.parse(request.url).pathname;
@@ -35,12 +37,19 @@ server.on('upgrade', function upgrade(request, socket, head) {
       wss.emit('connection', ws, request);
     });
   }
+  if (pathname === '/kws') {
+    kWss.handleUpgrade(request, socket, head, function done(ws) {
+      kWss.emit('connection', ws, request);
+    });
+  }
 });
 
 var clients = [];
 
-var currentPage = "game";
+var currentPage = "kahoot";
 
+
+kahootws(kWss);
 
 wss.on('connection', ws => {
   clients.push(ws);

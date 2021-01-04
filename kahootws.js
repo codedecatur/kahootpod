@@ -1,14 +1,13 @@
 const WebSocket = require("ws");
 
-export function kahootws(){
+export function kahootws(wss){
     var clients = [];
-
-    const wss = new WebSocket.Server({ port: 2087 });
 
     wss.on("connection", (ws) => {
         clients.push(ws);
 
         ws.on("message", (message) => {
+            console.log(message);
             try{
                 var msgJSON = JSON.parse(message);
                 switch(msgJSON.type){
