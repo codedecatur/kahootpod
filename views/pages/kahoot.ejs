@@ -9,5 +9,9 @@
 </body>
 <script>
     var kws = new WebSocket("wss://kahootpod.com:433/kws");
+
+    kws.onmessage = (e) => {
+        console.log(e.data);
+    }
 </script>
 </html>
