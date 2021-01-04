@@ -62,6 +62,10 @@ wss.on('connection', ws => {
         case("updateReq"):
           redirect(ws, currentPage);
           break;
+        case("admin"):
+          currentPage = msgJSON.content;
+          redirectAll(currentPage);
+          break;
       }
     } catch(e){
       ws.close();
