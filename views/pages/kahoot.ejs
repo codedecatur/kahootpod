@@ -10,6 +10,8 @@
 <script>
     var kws = new WebSocket("wss://kahootpod.com:433/kws");
 
+    console.log("hello!");
+
     kws.onmessage = (e) => {
         console.log(e.data);
     }

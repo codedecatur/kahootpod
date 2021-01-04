@@ -50,8 +50,6 @@ var currentPage = "kahoot";
 
 kahootws(kWss);
 
-console.log(kWss._events.connection);
-
 wss.on('connection', ws => {
   clients.push(ws);
   ws.on('message', message => {
