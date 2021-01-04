@@ -5,10 +5,10 @@ const WebSocket = require('ws');
 let app = express();
 app.set('view engine', 'ejs');
 
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: 2083 });
 var clients = [];
 
-var currentPage = "kahoot";
+var currentPage = "game";
 
 
 wss.on('connection', ws => {
@@ -57,4 +57,4 @@ app.get("/test", (req, res) => {
   res.render("pages/slides/title");
 })
 
-app.listen(3000);
+app.listen(443);
