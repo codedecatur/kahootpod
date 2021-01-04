@@ -18,7 +18,7 @@ app.get("/test", (req, res) => {
 })
 
 app.get("/admin/bassoon", (req, res) => {
-  res.render("pages/admin.ejs");
+  res.render("/pages/admin.ejs");
 })
 
 var privateKey = fs.readFileSync( 'privatekey.pem' );
