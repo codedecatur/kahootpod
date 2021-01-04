@@ -1,6 +1,8 @@
 const express = require("express");
 const ejs = require('ejs');
 const WebSocket = require('ws');
+const fs = require('fs');
+const https = require('https');
 
 let app = express();
 app.set('view engine', 'ejs');
@@ -57,4 +59,11 @@ app.get("/test", (req, res) => {
   res.render("pages/slides/title");
 })
 
-app.listen(443);
+
+var privateKey = fs.readFileSync( 'privatekey.pem' );
+var certificate = fs.readFileSync( 'certificate.pem' );
+
+https.createServer({
+  key: privateKey,
+  cert: certificate
+}, app).listen(443)
