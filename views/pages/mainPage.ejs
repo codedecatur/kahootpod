@@ -9,7 +9,7 @@
 
 </body>
 <script>
-    var ws = new WebSocket("wss://kahootpod.com:2083");
+    var ws = new WebSocket("wss://kahootpod.com:443/ws");
     ws.onmessage = (e) => {
         document.body.innerHTML = JSON.parse(e.data).content;
         var scripts = document.body.getElementsByTagName("script");

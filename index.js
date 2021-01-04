@@ -7,7 +7,35 @@ const https = require('https');
 let app = express();
 app.set('view engine', 'ejs');
 
-const wss = new WebSocket.Server({ port: 2083 });
+app.get("/", (req, res) => {
+    res.render("pages/mainPage");
+})
+
+app.get("/test", (req, res) => {
+  res.render("pages/slides/title");
+})
+
+
+var privateKey = fs.readFileSync( 'privatekey.pem' );
+var certificate = fs.readFileSync( 'certificate.pem' );
+
+const server = https.createServer({
+  key: privateKey,
+  cert: certificate
+}, app).listen(443)
+
+const wss = new WebSocket.Server({ noServer: true });
+
+server.on('upgrade', function upgrade(request, socket, head) {
+  const pathname = url.parse(request.url).pathname;
+
+  if (pathname === '/ws') {
+    wss.handleUpgrade(request, socket, head, function done(ws) {
+      wss.emit('connection', ws, request);
+    });
+  }
+});
+
 var clients = [];
 
 var currentPage = "game";
@@ -51,19 +79,3 @@ function redirectAll(url){
   });
 }
 
-app.get("/", (req, res) => {
-    res.render("pages/mainPage");
-})
-
-app.get("/test", (req, res) => {
-  res.render("pages/slides/title");
-})
-
-
-var privateKey = fs.readFileSync( 'privatekey.pem' );
-var certificate = fs.readFileSync( 'certificate.pem' );
-
-https.createServer({
-  key: privateKey,
-  cert: certificate
-}, app).listen(443)

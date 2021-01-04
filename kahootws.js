@@ -3,7 +3,7 @@ const WebSocket = require("ws");
 export function kahootws(){
     var clients = [];
 
-    const wss = new WebSocket.Server({ port: 8081 });
+    const wss = new WebSocket.Server({ port: 2087 });
 
     wss.on("connection", (ws) => {
         clients.push(ws);
