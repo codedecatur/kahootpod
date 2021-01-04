@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/ws'); %>
+        <script>
+            const url = 'ws://localhost:8080';
+            const ws = new WebSocket(url);
+            ws.onopen = () => {
+            }
+            ws.onerror = error => {
+                console.log(`WebSocket error: ${error}`)
+            }
+        </script>
+    </head>
+    <body>
+        <p>Test</p>
+        <%for(var i = 0; i < 10; i++){%>
+        <%=i%>
+        <%}%>
+    </body>
+</html>
+
+

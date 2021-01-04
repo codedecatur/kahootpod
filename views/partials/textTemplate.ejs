@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+            
+            body {
+                font-family: 'Roboto', sans-serif;
+                margin-left: 20vw;
+                margin-right: 20vw;
+                margin-top: 5vh;
+                font-size: calc(10px + 0.5vw + 0.5vh);
+            }
+            #text {
+                text-align: center;
+                margin-bottom: calc(20px + 5vh);
+            }
+            .flex-container { 
+                display: flex;
+                text-align: center;
+                justify-content: center;
+                width: 100%;
+            }
+            .flex-container #choices {
+                
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            .flex-container a {
+                background-color: rgb(170, 170, 170);
+                padding-left: 5px;
+                padding-right: 5px;
+                margin-left: calc(2px + 2vw);
+                margin-right: calc(2px + 2vw);
+            }
+            @media only screen and (max-width: 600px) {
+                body {
+                    font-size: calc(10px + 1vw + 1vh);
+                }
+            }
+        </style>
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <div>
+            <% if (name) { %>
+                <h1><%= name %></h1>
+            <% } %>
+            <% if (text) { %>
+                <p><%- text -%></p>
+            <% } %>
+        </div>
+    </body>
+    <script>
+
+    </script>
+</html>

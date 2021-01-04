@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin-left: 20vw;
+        margin-right: 20vw;
+        margin-top: 5vh;
+        font-size: calc(10px + 0.5vw + 0.5vh);
+    }
+    #text {
+        text-align: center;
+        margin-bottom: calc(20px + 5vh);
+    }
+    .flex-container { 
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .flex-container #choices {
+        
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .flex-container a {
+        background-color: rgb(170, 170, 170);
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-left: calc(2px + 2vw);
+        margin-right: calc(2px + 2vw);
+    }
+    @media only screen and (max-width: 600px) {
+        body {
+            font-size: calc(10px + 1vw + 1vh);
+        }
+    }
+</style>
+
+
+
+
+</head>
+<body>
+    <div class="flex-container" style="flex-direction: column;">
+        <p id="text"></p>
+        <div class="flex-container" id="choices"></div>
+    </div>
+    
+</body>
+
+<script>
+    class LevelManager {
+        constructor (){
+            this.level = undefined;
+        }
+        setLevel(level){
+            this.level = level;
+            this.loadLevel(this.level);
+        }
+        getLevel(){
+            return this.level;
+        }
+        loadLevel(level){
+            document.getElementById("text").innerHTML = level.story;
+            let choicesDiv = document.getElementById("choices");
+            choicesDiv.innerHTML = "";
+            for(let choice of level.choices){
+                let a = document.createElement("a");
+                a.onclick = () => {
+                    this.setLevel(levels[choice.nextLevel])
+                }
+                let text = document.createTextNode(choice.text);
+                a.appendChild(text);
+                choicesDiv.appendChild(a);
+            }
+        }
+    }
+    function level(story, choices){
+        this.story = story;
+        this.choices = choices;                
+    }
+    
+
+    var levels = {
+        "init": new level(`
+        John wakes up.<br>
+        John is a simple man, with simple needs.<br>
+        He is hungry. <br><br>What does John get from his kitchen?
+        `, [
+            {"text": "Tea", "nextLevel": "tea"},
+            {"text": "Tea", "nextLevel": "tea"},
+            {"text": "Tea", "nextLevel": "tea"},
+        ]),
+        "tea": new level(`
+        John needs tea to wake him up, preferably with ample milk and honey to supplement his ever-growing lack of awareness of the world around him. Thank goodness then, that you, in your infinite wisdom, have granted him such an item, and the grayscale landscape that occupies John’s vision brightens a little. <br><br>
+        Today is a workday, and John works as a banker. Every day he walks to work one toe at a time, just like everyone else in the mundane world in which he inhabits. Ever since his wife died, he has had to solely support his three, hopeless children. He thinks about this while he walks. <br><br>
+        While walking, John stops, as he thinks he hears someone walking behind him. 
+        <br>John turns.
+        <br><br>What does John see?
+        `, [
+            {"text": "A ghost", "nextLevel": "ghost"},
+            {"text": "A ghost, but this one is named Ikenna Okoro", "nextLevel": "ghost"},
+        ]),
+        "ghost": new level(`
+        He turns quickly but sees nothing. “Must have been the wind”, John says, much like Anton Chekhov once wrote when referring to a gun on a wall. 
+        <br>Well, that must have no significance to the story. John turns back around and continues his journey as if nothing had happened.
+        <br><br> John reaches the revolving door which bears the name of the bank above it, “Y’or Kray Z Bank”. Which is a perfectly normal name in John’s hypothetical universe. They named it that way during the war with the demon kings. 
+        <br><br>
+        Does John go inside?`
+        , [
+            {"text": "Yes", "nextLevel": "bank2"},
+            {"text": "No", "nextLevel": "bank1"},
+        ]),
+        "bank1": new level(`
+        Unfortunately, plot significance forces John into the bank. He scans his keycard and walks towards his office. A cold, icy wind pricks his neck as he enters. “John! I told you to get here an hour earlier today so we could prepare for the management changes on Friday!”, a condescending voice yells at him from the side of the room. 
+        <br><br>What does John do?
+        `, [
+            {"text": "Lie", "nextLevel": "lie"},
+            {"text": "Tell the truth", "nextLevel": "truth"},
+        ]),
+        "bank2": new level(`
+        John scans his keycard and walks towards his office. A cold, icy wind pricks his neck as he enters. “John! I told you to get here an hour earlier today so we could prepare for the management changes on Friday!”, a condescending voice yells at him from the side of the room. 
+        <br><br>What does John do?
+        `, [
+            {"text": "Lie", "nextLevel": "lie"},
+            {"text": "Tell the truth", "nextLevel": "truth"},
+        ]),
+        "lie": new level(`
+        “Ah, sorry. I forgot,” he replied. <br><br>
+        John had not, in fact, “forgot”. It was the alcohol and other substance abuse problems (commonly exhibited when dealing with mental illnesses such as Psychosis) he had which had caused him to lose sleep at night and generally neglect his own well being, so much so that his job had seemed insignificant to him just hours earlier. 
+        <br><br>His boss replies, “Fine, but that means you’ll have to work overtime today to cover the work you missed.”. 
+        <br>John nods. 
+        `, [
+            {"text": "Ok.", "nextLevel": "beginWork"},
+        ]),
+        "truth": new level(`
+        “Ah, sorry. I overslept.” <br>John had stayed up extra late the night before, exhibiting symptoms of a general lack of well being. As a matter of fact, the reason he was up so late the night before was his recent development of alcohol and substance abuse problems. <br><br>His boss replies, “Fine, but that means you’ll have to work overtime today to cover the work you missed.”
+        `, [
+            {"text": "Ok.", "nextLevel": "beginWork"},
+        ]),
+        "beginWork": new level(`
+        John begins his work for the day. 
+        <br>He opens up his computer, grabs his nice pen from his pen holder, and begins his paperwork for the day.
+        <br>He slides the stack of papers over closer towards himself. 
+        <br><br>
+        After a few required signatures and dates, he comes to a crossroads, with a little checkbox under a prompt: “implicating the osteo-monetary condition of the poriougonous state of the bank.” 
+        <br>John, after a few seconds of hesitation, checks:
+        `, [
+            {"text": "Y", "nextLevel": "turtlemaybe"},
+            {"text": "N", "nextLevel": "turtlemaybe"},
+        ]),
+        "turtlemaybe": new level(`
+        Almost instantly after checking the box, a draft of air blows his paperwork off his desk into the hallway. <br>
+        John collects most of the paper, and notices a strange, squirming lump under one of them. After brief consideration for his own safety and acknowledgement of his fear of rats, he picks the piece of paper up, revealing a turtle on its back. 
+        <br><br>At the same time, he hears his boss yell angrily “JOHN! MY OFFICE! NOW!” 
+        
+        <br><br>John...
+        `, [
+            {"text": "Flips the turtle over, then runs to his boss’s office", "nextLevel": "flipsTurtle"},
+            {"text": "Runs to his boss’s office", "nextLevel": "doesntFlipTurtle"},
+        ]),
+        "flipsTurtle": new level(`
+        John flips the turtle, and goes to his boss’s office. He seems extremely agitated. He looks at John with a stern expression. “John with an E, not you.” John turns around and goes back to his cubicle, passing by John with an E, who looked considerably worried. 
+        <br><br>Back in the hallway, John can’t find the turtle. He goes back into his cubicle and continues to work on his paperwork. 
+        <br><br>
+        He continues working for a few hours, and goes on a lunch break. 
+        He opens his drawer and takes out his lunch box. He opens it. “Oh, a chicken salad sandwich today! I’m not normally so lucky,” he thinks. 
+        <br>After his lunch break, he continues filling out unfinished paperwork. At 5:01 PM, he finishes and begins to head home, having satisfied his boss’s idea of overtime. 
+        <br><br>He gets into his car, and turns the keys. 
+
+        `, [
+            {"text": "Lie", "nextLevel": "lie"},
+            {"text": "Tell the truth", "nextLevel": "truth"},
+        ]),
+        "doesntFlipTurtle": new level(`
+        John goes to his boss’s office. He seems extremely agitated. He looks at John with a stern expression. “John with an E, not you.” John turns around and goes back to his cubicle, passing by John with an E, who looked considerably worried. 
+        <br><br>Back in the hallway, John can’t find the turtle. He goes back into his cubicle and continues to work on his paperwork. 
+        <br><br>
+        He continues working for a few hours, and goes on a lunch break. 
+        He opens his drawer and takes out his lunch box. He opens it. “Oh, a chicken salad sandwich today! I’m not normally so lucky,” he thinks. 
+        <br>After his lunch break, he continues filling out unfinished paperwork. At 5:01 PM, he finishes and begins to head home, having satisfied his boss’s idea of overtime. 
+        <br><br>He gets into his car, and turns the keys...
+        `, [
+            {"text": "Left", "nextLevel": "left"},
+            {"text": "Right", "nextLevel": "right"},
+        ]),
+        "left": new level(`
+
+        `, [
+            {"text": "Lie", "nextLevel": "lie"},
+            {"text": "Tell the truth", "nextLevel": "truth"},
+        ]),
+        "right": new level(`
+
+        `, [
+            {"text": "Lie", "nextLevel": "lie"},
+            {"text": "Tell the truth", "nextLevel": "truth"},
+        ]),
+    }
+
+    levelManager = new LevelManager;
+    levelManager.setLevel(levels["init"]);
+</script>
+
+</html>
