@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admininstration Panel</title>
+</head>
+<body>
+    <p>
+        Admin Panel:
+    </p>
+    <textarea id="admin"></textarea>
+    <button onclick="ws.send(JSON.stringify({type: 'admin', content: document.getElementById('admin').value}))"></button>
+
+</body>
+<script>
+    var ws = new WebSocket("wss://kahootpod.com:433/ws");
+</script>
+</html>
