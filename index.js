@@ -48,8 +48,9 @@ var clients = [];
 
 var currentPage = "kahoot";
 
-
 kahootws(kWss);
+
+console.log(kWss);
 
 wss.on('connection', ws => {
   clients.push(ws);
