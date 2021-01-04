@@ -1,6 +1,6 @@
 const WebSocket = require("ws");
 
-export function kahootws(wss){
+function kahootws(wss){
     var clients = [];
 
     wss.on("connection", (ws) => {
@@ -23,3 +23,5 @@ export function kahootws(wss){
         })
     })
 }
+
+module.exports = {kahootws};
