@@ -22,8 +22,6 @@ function kahootws(wss){
             }
         })
 
-        ws.send("hola!");
-
         ws.on("close", (...args) => {
             clients.splice(clients.indexOf(ws), 1);
         })
