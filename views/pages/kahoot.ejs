@@ -35,7 +35,7 @@
 
     function answerQuestion(ans){
         answers[currentPrompt] = ans;
-        ws.send(JSON.stringify({type: "answer", content: ans}));
+        scoped.kws.send(JSON.stringify({type: "answer", content: ans}));
     }
 </script>
 </html>
