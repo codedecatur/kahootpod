@@ -77,7 +77,6 @@ wss.on('connection', ws => {
 });
 
 function sendToAll(s){
-  console.log(s)
   for(let i of clients){
     i.send(s);
   }
