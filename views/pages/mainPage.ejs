@@ -18,8 +18,8 @@
         var scripts = document.body.getElementsByTagName("script");
         for(let i of scripts){
             eval(i.innerHTML);
-            scoped["answerQuestion"] = answerQuestion;
         }
+        scoped["answerQuestion"] = answerQuestion;
     }
     ws.onopen = (e) => {
         ws.send(JSON.stringify({type: "updateReq", content: ""}));
