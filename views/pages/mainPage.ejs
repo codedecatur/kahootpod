@@ -26,7 +26,7 @@
 
     // Courtesy of Hypersoft-Systems: U.-S.-A.
     function scopeEval(scope, script) {
-    return Function('return (' + script + ')').bind(scope)();
+    return Function('return {' + script + '}').bind(scope)();
     }
 </script>
 </html>
