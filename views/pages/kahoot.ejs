@@ -12,6 +12,7 @@
     </div>
 </body>
 <script>
+    let answers = {}
     var kws = new WebSocket("wss://kahootpod.com:443/kws");
 
     var currentPrompt = "Welcome to KahootPod: The Game!"
@@ -33,6 +34,7 @@
     }
 
     function answerQuestion(ans){
+        ab
         ws.send(JSON.stringify({type: "answer", content: ans}));
     }
 </script>
