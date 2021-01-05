@@ -14,7 +14,7 @@
         document.body.innerHTML = JSON.parse(e.data).content;
         var scripts = document.body.getElementsByTagName("script");
         for(let i of scripts){
-            eval(i.innerHTML);
+            scopeEval(window, i.innerHTML);
         }
     }
     ws.onopen = (e) => {
@@ -22,6 +22,11 @@
     }
     ws.onclose = (e) => {
         window.location = window.location.href;
+    }
+
+    // Courtesy of Hypersoft-Systems: U.-S.-A.
+    function scopeEval(scope, script) {
+    return Function('"use strict";return (' + script + ')').bind(scope)();
     }
 </script>
 </html>
