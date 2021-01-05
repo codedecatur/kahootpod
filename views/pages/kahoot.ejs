@@ -34,7 +34,7 @@
     }
 
     function answerQuestion(ans){
-        ab
+        answers[currentPrompt] = ans;
         ws.send(JSON.stringify({type: "answer", content: ans}));
     }
 </script>
