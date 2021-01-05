@@ -27,10 +27,5 @@
     ws.onclose = (e) => {
         window.location = window.location.href;
     }
-
-    // Courtesy of Hypersoft-Systems: U.-S.-A.
-    function scopeEval(scope, script) {
-    return Function(script).bind(scope)();
-    }
 </script>
 </html>
