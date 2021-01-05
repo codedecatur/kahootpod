@@ -13,7 +13,9 @@ function kahootws(wss){
             try{
                 var msgJSON = JSON.parse(message);
                 switch(msgJSON.type){
-                    
+                    case "answer":
+                        console.log(msgJSON.content);
+                        break;
                 }
             } catch (e) {
                 ws.close();
