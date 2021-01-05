@@ -9,12 +9,16 @@
 
 </body>
 <script>
+
+    var scoped = {};
+
     var ws = new WebSocket("wss://kahootpod.com:443/ws");
     ws.onmessage = (e) => {
         document.body.innerHTML = JSON.parse(e.data).content;
         var scripts = document.body.getElementsByTagName("script");
         for(let i of scripts){
-            scopeEval(window, i.innerHTML);
+            eval(i.innerHTML);
+            scoped["answerQuestion"] = answerQuestion;
         }
     }
     ws.onopen = (e) => {
