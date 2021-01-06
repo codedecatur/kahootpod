@@ -5,6 +5,7 @@ const fs = require('fs');
 const https = require('https');
 const url = require("url");
 const { kahootws } = require("./kahootws");
+const path = require("path");
 
 let app = express();
 app.set('view engine', 'ejs');
