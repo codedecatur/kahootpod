@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+</body>
+<script>
+    var kws = new WebSocket("wss://kahootpod.com:443/kws");
+    kws.onmessage = (e) => {
+        try{
+            var msgJSON = JSON.parse(e.data);
+            switch(msgJSON.type){
+                case "prompts":
+                    document.body.innerText = JSON.stringify(msgJSON.prompts);
+                    break;
+            }
+        } catch(e){
+            kws.close();
+        } 
+    }
+
+    kws.onopen = (e) => {
+        kws.send(JSON.stringify({type:"admiiiin"}));
+    }
+</script>
+</html>
