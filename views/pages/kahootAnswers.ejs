@@ -77,7 +77,8 @@
                     var prompt = msgJSON.prompts[currentPrompt];
                     prompt.answers.sort((a, b) => {return (b.totalRating / b.timesRated) - (a.totalRating / a.timesRated)});
                     for(let i of prompt.answers){
-                        document.getElementsByClassName("question")[0].innerHTML += createPromptHTML(i.user, i.content, i.totalRating, i.timesRated);
+                        console.log(i);
+                        document.getElementsByClassName("question")[0].innerHTML += createPromptHTML(i.user, i.answer, i.totalRating, i.timesRated);
                     }
                     
                     break;
