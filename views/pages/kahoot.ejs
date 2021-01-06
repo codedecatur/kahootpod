@@ -99,6 +99,7 @@
                     break;
                 case "submissions":
                     for(let i of msgJSON.content.submissions){
+                        scoped.kws.send(JSON.stringify({type: "recievedAns", ansId: i.ansId}));
                         document.getElementById("kahoot-answers-container").innerHTML += createSubmissionHTML(i.answer, i.ansId);
                     }
                     break;
