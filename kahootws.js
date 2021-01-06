@@ -1,11 +1,13 @@
 const WebSocket = require("ws");
 
 function kahootws(wss){
-    var prompts = [new prompt("test?")];
+    var prompts = [new prompt("test?"), new prompt("test2?")];
 
     var clients = [];
 
     console.log("here!")
+
+    var currentPrompt = 0;
 
     wss.on("connection", (ws) => {
         clients.push(ws);
@@ -19,12 +21,16 @@ function kahootws(wss){
                         for(let i of prompts){
                             if(i.prompt === msgJSON.prompt){
                                 i.answers.push({answer: msgJSON.content, totalRating: 0, timesRated: 0, user: msgJSON.user});
-
                             }
                         }
                         break;
                     case "admin":
-                        sendPrompt(msgJSON.content);
+                        currentPrompt = msgJSON.content;
+                        sendPrompt(prompts[currentPrompt].prompt);
+                        break;
+                    case "updateReq":
+                        sendPromptToOne(ws, prompts[currentPrompt].prompt);
+                        break;
                 }
             } catch (e) {
                 ws.close();
@@ -40,6 +46,10 @@ function kahootws(wss){
         for(let i of clients){
             i.send(JSON.stringify({type: "prompt", content: p}));
         }
+    }
+
+    function sendPromptToOne(ws, p){
+        ws.send(JSON.stringify({type: "prompt", content: p}));
     }
 
 

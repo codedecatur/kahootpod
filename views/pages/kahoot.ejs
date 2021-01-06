@@ -60,6 +60,10 @@
         } 
     }
 
+    kws.onopen = (e) => {
+        kws.send(JSON.stringify({type: "updateReq", content: ""}));
+    }
+
     function answerQuestion(ans){
         scoped.answers[currentPrompt] = ans;
         scoped.kws.send(JSON.stringify({type: "answer", content: ans, prompt: scoped.currentPrompt, user: "user"}));
