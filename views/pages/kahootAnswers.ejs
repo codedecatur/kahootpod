@@ -45,18 +45,18 @@
                 <h3 class="author">Hayden Carpenter</h3>
                 <p class="answer-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer commodo tellus justo, et consectetur dolor faucibus ut. Duis vitae dui sed lectus viverra dapibus vitae nec quam. In ut dui in quam placerat aliquam. Ut in suscipit nunc. Suspendisse tincidunt convallis mauris, eget aliquet odio suscipit quis. Sed vitae ligula vulputate, lacinia lorem pellentesque, accumsan velit. Ut at mi blandit, porta elit ut, mollis nunc. Integer ut euismod lectus. Donec maximus, nibh eget lacinia scelerisque, quam lectus viverra justo, sit amet molestie nulla nibh quis libero.</p>
                 <p class="answer-rating">
-                    <span class="total-rating">10 Likes</span> / 
+                    <span class="total-rating">0 Likes</span> / 
                     <span class="times-rated">10 Votes</span> = 
-                    <span class="calculated-rating">1.0</span>
+                    <span class="calculated-rating">0</span>
                 </p>
             </div>
             <div class="answer">
                 <h3 class="author">Hayden Carpenter</h3>
                 <p class="answer-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer commodo tellus justo, et consectetur dolor faucibus ut. Duis vitae dui sed lectus viverra dapibus vitae nec quam. In ut dui in quam placerat aliquam. Ut in suscipit nunc. Suspendisse tincidunt convallis mauris, eget aliquet odio suscipit quis. Sed vitae ligula vulputate, lacinia lorem pellentesque, accumsan velit. Ut at mi blandit, porta elit ut, mollis nunc. Integer ut euismod lectus. Donec maximus, nibh eget lacinia scelerisque, quam lectus viverra justo, sit amet molestie nulla nibh quis libero.</p>
                 <p class="answer-rating">
-                    <span class="total-rating">10 Likes</span> / 
+                    <span class="total-rating">0 Likes</span> / 
                     <span class="times-rated">10 Votes</span> = 
-                    <span class="calculated-rating">1.0</span>
+                    <span class="calculated-rating">0</span>
                 </p>
             </div>
         </div>
@@ -99,7 +99,7 @@
                 <p class="answer-rating">
                     <span class="total-rating">`+rating+` Likes</span> / 
                     <span class="times-rated">`+numRates+` Votes</span> = 
-                    <span class="calculated-rating">`+(rating/numRates)+`</span>
+                    <span class="calculated-rating">`+((rating == 0 && numRates == 0)?0:rating/numRates)+`</span>
                 </p>
             </div>`
     }

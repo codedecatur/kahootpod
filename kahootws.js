@@ -1,7 +1,14 @@
 const WebSocket = require("ws");
 
+//plant format: {answer: msgJSON.content, totalRating: 5, timesRated: 5, user: msgJSON.user, ansId: id}
+
 function kahootws(wss){
-    var prompts = [new prompt("test?"), new prompt("test2?")];
+    var prompts = [
+        new prompt("Is Ikenna actually dead? What is the significance of if he is or not? Does it matter?"), 
+        new prompt("How does the state of the narrator's external environment reflect their internal environment? Consider how the narrator considers his own mental state, and how all of the characters consider the state of their country."),
+        new prompt("What do you think the “ghosts” mean in the story?"),
+        new prompt("What is the purpose of the first person perspective used in the story?")
+    ];
 
     var clients = [];
     var admins = [];
@@ -121,9 +128,14 @@ function kahootws(wss){
 
 }
 
-function prompt(s){
+function prompt(s, plants){
     this.prompt = s;
     this.answers = [];
+    if(plants){
+        for(let i of plants){
+            this.answers.push(i);
+        }
+    }
 }
 
 module.exports = {kahootws};
