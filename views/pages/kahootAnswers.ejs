@@ -64,12 +64,22 @@
 </body>
 <script>
     var kws = new WebSocket("wss://kahootpod.com:443/kws");
+    var currentPrompt = 0;
     kws.onmessage = (e) => {
         try{
             var msgJSON = JSON.parse(e.data);
             switch(msgJSON.type){
                 case "prompts":
-                    document.body.innerText = JSON.stringify(msgJSON.prompts);
+                    document.getElementsByClassName("question")[0].innerHTML = "";
+                    currentPrompt = msgJSON.currentPrompt;
+
+                    document.getElementsByClassName("question")[0].innerHTML += "<h1>" +currentPrompt+ "</h1>";
+                    var prompt = msgJSON.prompts[currentPrompt];
+                    prompt.answers.sort((a, b) => {return (b.totalRating / b.timesRated) - (a.totalRating / a.timesRated)});
+                    for(let i of prompt.answers){
+                        document.getElementsByClassName("question")[0].innerHTML += createPromptHTML(i.user, i.content, i.totalRating, i.timesRated);
+                    }
+                    
                     break;
             }
         } catch(e){
@@ -81,8 +91,20 @@
         kws.send(JSON.stringify({type:"admiiiin"}));
     }
 
+    function createPromptHTML(user, answer, rating, numRates){
+        `<div class="answer">
+                <h3 class="author">`+user+`</h3>
+                <p class="answer-text">`+answer+`</p>
+                <p class="answer-rating">
+                    <span class="total-rating">`+rating+` Likes</span> / 
+                    <span class="times-rated">`+numRates+` Votes</span> = 
+                    <span class="calculated-rating">`+(rating/numRates)+`</span>
+                </p>
+            </div>`
+    }
+
     function update(){kws.send(JSON.stringify({type:"adminUp"}));}
 
-    setInterval(update, 500);
+    setInterval(update, 1000);
 </script>
 </html>

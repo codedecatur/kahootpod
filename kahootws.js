@@ -8,8 +8,6 @@ function kahootws(wss){
 
     var numSubs = 5;
 
-    console.log("here!")
-
     var currentPrompt = 0;
 
     wss.on("connection", (ws) => {
@@ -65,7 +63,7 @@ function kahootws(wss){
 
     function sendAdminsAnswers(){
         for(let i of admins){
-            i.send(JSON.stringify({type: "prompts", prompts: prompts}));
+            i.send(JSON.stringify({type: "prompts", prompts: prompts, currentPrompt: currentPrompt}));
         }
     }
 

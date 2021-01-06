@@ -96,6 +96,7 @@
                 case "prompt":
                     scoped.currentPrompt = msgJSON.content;
                     document.getElementById("prompt").innerText = scoped.currentPrompt;
+                    document.getElementById("kahoot-answers-container").innerHTML = "";
                     break;
                 case "submissions":
                     document.getElementById("kahoot-answers-container").innerHTML = "";
