@@ -53,7 +53,7 @@
             switch(msgJSON.type){
                 case "prompt":
                     scoped.currentPrompt = msgJSON.content;
-                    document.getElementById("prompt").textContext = scoped.currentPrompt;
+                    document.getElementById("prompt").innerText = scoped.currentPrompt;
             }
         } catch (e) {
             scoped.kws.close();
