@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    Please enter your name: 
+    <br>
+    <textarea id="nameBox" style="resize: none;"></textarea>
+    <br>
+    <button onclick="ws.send(JSON.stringify({type: 'name', content: document.getElementById('nameBox').value}))">Submit</button>
+</body>
+</html>

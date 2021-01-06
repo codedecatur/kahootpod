@@ -54,7 +54,7 @@ server.on('upgrade', function upgrade(request, socket, head) {
 
 var clients = [];
 
-var currentPage = "kahoot";
+var currentPage = "name";
 
 kahootws(kWss);
 
@@ -70,6 +70,12 @@ wss.on('connection', ws => {
         case("admin"):
           currentPage = msgJSON.content;
           redirectAll(currentPage);
+          break;
+        case("name"):
+          ws.userName = msgJSON.content;
+          break;
+        case("getName"):
+          ws.send(JSON.stringify({type: "userName", content: ws.userName}));
           break;
       }
     } catch(e){
