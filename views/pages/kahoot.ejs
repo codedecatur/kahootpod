@@ -101,7 +101,7 @@
                     document.getElementById("kahoot-answers-container").innerHTML = "";
                     for(let i of msgJSON.content.submissions){
                         scoped.kws.send(JSON.stringify({type: "recievedAns", ansId: i.ansId}));
-                        document.getElementById("kahoot-answers-container").innerHTML += createSubmissionHTML(i.answer, i.ansId);
+                        document.getElementById("kahoot-answers-container").appendChild(createSubmissionHTML(i.answer, i.ansId));
                     }
                     break;
             }
@@ -111,10 +111,14 @@
     }
 
     function createSubmissionHTML(s, ansId){
-        return `<div class="submission">
-            <p>`+s+`</p>
-            <img id="ansId`+ansId+`" src="https://kahootpod.com/images/unliked.png" onclick="if(document.getElementById('ansId' + `+ansId+`).src == 'https://kahootpod.com/images/unliked.png'){scoped.kws.send(JSON.stringify({type: 'like', ansId: `+ansId+`}));document.getElementById('ansId' + `+ansId+`).src = '/images/liked.png';} else {scoped.kws.send(JSON.stringify({type: 'dislike', ansId: `+ansId+`}));document.getElementById('ansId' + `+ansId+`).src = 'https://kahootpod.com/images/unliked.png';}">
-        </div>`;
+        var div = document.createElement("div");
+        div.className = "submission";
+        var p = document.createElement("p");
+        p.innerText = s;
+        div.appendChild(p);
+        div.innerHTML += `<img id="ansId`+ansId+`" src="https://kahootpod.com/images/unliked.png" onclick="if(document.getElementById('ansId' + `+ansId+`).src == 'https://kahootpod.com/images/unliked.png'){scoped.kws.send(JSON.stringify({type: 'like', ansId: `+ansId+`}));document.getElementById('ansId' + `+ansId+`).src = '/images/liked.png';} else {scoped.kws.send(JSON.stringify({type: 'dislike', ansId: `+ansId+`}));document.getElementById('ansId' + `+ansId+`).src = 'https://kahootpod.com/images/unliked.png';}">`;
+
+        return div;
     }
 
     kws.onopen = (e) => {
