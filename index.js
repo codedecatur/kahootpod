@@ -21,6 +21,10 @@ app.get("/admin/bassoon", (req, res) => {
   res.render("pages/admin");
 })
 
+app.get("/admin/bassoon/kahootAns", (req, res) => {
+  res.render("pages/kahootAnswers.ejs");
+})
+
 var privateKey = fs.readFileSync( 'privatekey.pem' );
 var certificate = fs.readFileSync( 'certificate.pem' );
 

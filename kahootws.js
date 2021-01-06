@@ -4,6 +4,7 @@ function kahootws(wss){
     var prompts = [new prompt("test?"), new prompt("test2?")];
 
     var clients = [];
+    var admins = [];
 
     console.log("here!")
 
@@ -31,6 +32,9 @@ function kahootws(wss){
                     case "updateReq":
                         sendPromptToOne(ws, prompts[currentPrompt].prompt);
                         break;
+                    case "admiiiin":
+                        admins.push(ws);
+                        break;
                 }
             } catch (e) {
                 ws.close();
@@ -41,6 +45,12 @@ function kahootws(wss){
             clients.splice(clients.indexOf(ws), 1);
         })
     })
+
+    function sendAdminsAnswers(){
+        for(let i of admins){
+            i.send(JSON.stringify({type: "prompts", prompts: prompts}));
+        }
+    }
 
     function sendPrompt(p){
         for(let i of clients){

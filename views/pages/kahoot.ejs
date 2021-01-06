@@ -7,20 +7,38 @@
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         body {font-family: 'Roboto', sans-serif;}
         #kahoot-prompt-container {
+            display: block;
             margin-left: 13%;
             margin-right: 13%;
             margin-top: 7%;
             text-align: center;
         }
+        #kahoot-answers-container {
+            margin-left: 13%;
+            margin-right: 13%;
+            margin-top: 7%;
+            text-align: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
         .flex-container {
             display: flex;
-            align-items: center;
+        }
+        #answer-container {
+            align-items: center;    
             flex-direction: column;
-            
         }
         #answer-input {
             margin-bottom: 10px;
             width: calc(50px + 30vw);
+        }
+        .submission {
+            padding-left: 10px;
+            padding-right: 10px;
+            height: calc(50px + 10vh);
+        }
+        .submission img {
+            height: 25px;
         }
     </style>
 
@@ -28,14 +46,41 @@
 <body>
     <div id="kahoot-prompt-container">
         <h1 id="prompt"></h1>
-        <div class="flex-container">
+        <div class="flex-container" id="answer-container">
             <textarea id="answer-input" name="answer-input" style="resize: none;"></textarea>
             <button onclick="scoped.answerQuestion(document.getElementById('answer-input').value)">Submit Answer</button>
         </div>
         
     </div>
-    <div id="kahoot-answers-container">
-        
+    <div class="flex-container" id="kahoot-answers-container">
+        <div class="submission">
+            <p>This is a sample submission's text</p>
+            <img src="images/liked.png" onclick="">
+        </div>
+        <div class="submission">
+            <p>This is a sample submission's text</p>
+            <img src="images/unliked.png" onclick="">
+        </div>
+        <div class="submission">
+            <p>This is a sample submission's text</p>
+            <img src="images/unliked.png" onclick="">
+        </div>
+        <div class="submission">
+            <p>This is a sample submission's text</p>
+            <img src="images/unliked.png" onclick="">
+        </div>
+        <div class="submission">
+            <p>This is a sample submission's text</p>
+            <img src="images/unliked.png" onclick="">
+        </div>
+        <div class="submission">
+            <p>This is a sample submission's text</p>
+            <img src="images/unliked.png" onclick="">
+        </div>
+        <div class="submission">
+            <p>This is a sample submission's text</p>
+            <img src="images/unliked.png" onclick="">
+        </div>
     </div>
 </body>
 <script>
