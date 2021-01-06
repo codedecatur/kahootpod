@@ -80,10 +80,21 @@ function kahootws(wss){
     }
 
     function distAnswers(){
+        var randUsed = [];
         for(let i of clients){
             var obj = {type: "submissions", content: {submissions: []}};
             for(var j = 0; j < numSubs; j++){
-                obj.content.submissions.push(prompts[currentPrompt].answers[Math.floor(Math.random() * prompts[currentPrompt].answers.length)]);
+                var randUsedLocal = [];
+                if(randUsed.length == prompts[currentPrompt].answers.length){
+                    randUsed = [];
+                }
+                var rand = Math.floor(Math.random() * prompts[currentPrompt].answers.length);
+                while(randUsed.indexOf(rand) != -1 || randUsedLocal.indexOf(rand) != -1){
+                    rand = Math.floor(Math.random() * prompts[currentPrompt].answers.length);
+                }
+                randUsed.push(rand);
+                randUsedLocal.push(rand);
+                obj.content.submissions.push(prompts[currentPrompt].answers[rand]);
             }
             i.send(JSON.stringify(obj));
         }

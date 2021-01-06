@@ -98,6 +98,7 @@
                     document.getElementById("prompt").innerText = scoped.currentPrompt;
                     break;
                 case "submissions":
+                    document.getElementById("kahoot-answers-container").innerHTML = "";
                     for(let i of msgJSON.content.submissions){
                         scoped.kws.send(JSON.stringify({type: "recievedAns", ansId: i.ansId}));
                         document.getElementById("kahoot-answers-container").innerHTML += createSubmissionHTML(i.answer, i.ansId);
@@ -122,7 +123,7 @@
 
     function answerQuestion(ans){
        //scoped.answers[scoped.currentPrompt] = ans;
-        scoped.kws.send(JSON.stringify({type: "answer", content: ans, prompt: scoped.currentPrompt, user: "user"}));
+        scoped.kws.send(JSON.stringify({type: "answer", content: ans, prompt: scoped.currentPrompt, user: userName}));
     }
 </script>
 </html>
