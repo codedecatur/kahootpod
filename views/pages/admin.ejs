@@ -16,6 +16,8 @@
     <br>
     <textarea id="kadmin"></textarea>
     <button onclick="kws.send(JSON.stringify({type: 'admin', content: document.getElementById('kadmin').value}))">Submit</button>
+    <br>
+    <button onclick="kws.send(JSON.stringify({type: 'adminDistSubmissions'}))">Send people submissions</button>
 
 </body>
 <script>

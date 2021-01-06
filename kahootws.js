@@ -6,6 +6,8 @@ function kahootws(wss){
     var clients = [];
     var admins = [];
 
+    var numSubs = 5;
+
     console.log("here!")
 
     var currentPrompt = 0;
@@ -37,6 +39,10 @@ function kahootws(wss){
                         break;
                     case "adminUp":
                         sendAdminsAnswers();
+                        break;
+                    case "adminDistSubmissions":
+                        distAnswers();
+                        break;
                 }
             } catch (e) {
                 ws.close();
@@ -63,6 +69,36 @@ function kahootws(wss){
     function sendPromptToOne(ws, p){
         ws.send(JSON.stringify({type: "prompt", content: p}));
     }
+
+    function distAnswers(){
+        for(let i of clients){
+            var obj = {type: "submissions", content: {submissions: []}};
+            for(var j = 0; j < numSubs; j++){
+                obj.content.submissions.push(prompts[currentPrompt].answers[Math.floor(Math.random() * prompts[currentPrompt].answers.length)]);
+            }
+            i.send(JSON.stringify(obj));
+        }
+
+    }
+
+    function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+      
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+      
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+      
+          // And swap it with the current element.
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+      
+        return array;
+      }
 
 
 }

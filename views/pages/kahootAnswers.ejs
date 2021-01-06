@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+
+    </style>
 </head>
 <body>
-    
+    <div class="question">
+        <h1 class="prompt">Sample prompt</h1>
+        <div class="answers">
+            <div class="answer">
+                <p class="answer-text">Sample answer text</p>
+                <p class="answer-rating">
+                    <span class="total-rating">10</span>
+                    <span class="times-rated">10</span> = 
+                    <span class="calculated-rating">1.0</span>
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
 <script>
     var kws = new WebSocket("wss://kahootpod.com:443/kws");
