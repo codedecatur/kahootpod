@@ -25,5 +25,9 @@
     kws.onopen = (e) => {
         kws.send(JSON.stringify({type:"admiiiin"}));
     }
+
+    function update(){kws.send("adminUp");}
+
+    setInterval(update, 500);
 </script>
 </html>

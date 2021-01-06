@@ -35,6 +35,8 @@ function kahootws(wss){
                     case "admiiiin":
                         admins.push(ws);
                         break;
+                    case "adminUp":
+                        sendAdminsAnswers();
                 }
             } catch (e) {
                 ws.close();
