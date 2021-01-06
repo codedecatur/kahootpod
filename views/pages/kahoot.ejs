@@ -82,7 +82,7 @@
                     break;
                 case "submissions":
                     for(let i of msgJSON.content.submissions){
-                        document.getElementById("kahoot-answers-container").innerHTML += createSubmissionHTML(i);
+                        document.getElementById("kahoot-answers-container").innerHTML += createSubmissionHTML(i.answer);
                     }
                     break;
             }
