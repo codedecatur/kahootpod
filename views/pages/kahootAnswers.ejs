@@ -73,7 +73,7 @@
                     document.getElementsByClassName("question")[0].innerHTML = "";
                     currentPrompt = msgJSON.currentPrompt;
 
-                    document.getElementsByClassName("question")[0].innerHTML += "<h1>" +currentPrompt+ "</h1>";
+                    document.getElementsByClassName("question")[0].innerHTML += "<h1 class='prompt'>" +prompts[currentPrompt].prompt+ "</h1>";
                     var prompt = msgJSON.prompts[currentPrompt];
                     prompt.answers.sort((a, b) => {return (b.totalRating / b.timesRated) - (a.totalRating / a.timesRated)});
                     for(let i of prompt.answers){
@@ -92,7 +92,7 @@
     }
 
     function createPromptHTML(user, answer, rating, numRates){
-        `<div class="answer">
+        return `<div class="answer">
                 <h3 class="author">`+user+`</h3>
                 <p class="answer-text">`+answer+`</p>
                 <p class="answer-rating">
