@@ -1,6 +1,8 @@
 const WebSocket = require("ws");
 
 function kahootws(wss){
+    var prompts = [new prompt("test?")];
+
     var clients = [];
 
     console.log("here!")
@@ -14,7 +16,12 @@ function kahootws(wss){
                 var msgJSON = JSON.parse(message);
                 switch(msgJSON.type){
                     case "answer":
-                        console.log(msgJSON.content);
+                        for(let i of prompts){
+                            if(i.prompt === msgJSON.prompt){
+                                i.answers.push({answer: msgJSON.content, totalRating: 0, timesRated: 0, user: msgJSON.user});
+                                
+                            }
+                        }
                         break;
                 }
             } catch (e) {
@@ -26,6 +33,11 @@ function kahootws(wss){
             clients.splice(clients.indexOf(ws), 1);
         })
     })
+}
+
+function prompt(s){
+    this.prompt = s;
+    this.answers = [];
 }
 
 module.exports = {kahootws};

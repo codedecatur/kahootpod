@@ -19,8 +19,10 @@
         for(let i of scripts){
             eval(i.innerHTML);
         }
-        scoped["answerQuestion"] = answerQuestion;
-        scoped["kws"] = kws;
+        try{scoped["answerQuestion"] = answerQuestion;}catch(e){};
+        try{scoped["kws"] = kws;}catch(e){};
+        try{scoped.currentPrompt = currentPrompt}catch(e){};
+        try{scoped.answers = answers}catch(e){};
     }
     ws.onopen = (e) => {
         ws.send(JSON.stringify({type: "updateReq", content: ""}));

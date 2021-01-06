@@ -3,12 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        body {font-family: 'Roboto', sans-serif;}
+        #kahoot-prompt-container {
+            margin-left: 13%;
+            margin-right: 13%;
+            margin-top: 7%;
+            text-align: center;
+        }
+        .flex-container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            
+        }
+        #answer-input {
+            margin-bottom: 10px;
+            width: calc(50px + 30vw);
+        }
+    </style>
+
 </head>
 <body>
-    <div id="kahoot-container">
+    <div id="kahoot-prompt-container">
         <h1 id="prompt"></h1>
-        <textarea id="answer-input" name="answer-input" style="resize: none;"></textarea>
-        <button onclick="scoped.answerQuestion(document.getElementById('answer-input').value)">Submit Answer</button>
+        <div class="flex-container">
+            <textarea id="answer-input" name="answer-input" style="resize: none;"></textarea>
+            <button onclick="scoped.answerQuestion(document.getElementById('answer-input').value)">Submit Answer</button>
+        </div>
+        
+    </div>
+    <div id="kahoot-answers-container">
+        
     </div>
 </body>
 <script>
@@ -25,17 +52,17 @@
             let msgJSON = JSON.parse(e.data);
             switch(msgJSON.type){
                 case "prompt":
-                    currentPrompt = msgJSON.content;
-                    document.getElementById("prompt").textContext = currentPrompt;
+                    scoped.currentPrompt = msgJSON.content;
+                    document.getElementById("prompt").textContext = scoped.currentPrompt;
             }
         } catch (e) {
-            kws.close();
+            scoped.kws.close();
         } 
     }
 
     function answerQuestion(ans){
-        answers[currentPrompt] = ans;
-        scoped.kws.send(JSON.stringify({type: "answer", content: ans}));
+        scoped.answers[currentPrompt] = ans;
+        scoped.kws.send(JSON.stringify({type: "answer", content: ans, prompt: scoped.currentPrompt, user: "user"}));
     }
 </script>
 </html>
