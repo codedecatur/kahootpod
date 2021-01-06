@@ -12,8 +12,12 @@
     <textarea id="admin"></textarea>
     <button onclick="ws.send(JSON.stringify({type: 'admin', content: document.getElementById('admin').value}))">Submit</button>
 
+    <textarea id="kadmin"></textarea>
+    <button onclick="kws.send(JSON.stringify({type: 'admin', content: document.getElementById('kadmin').value}))">Submit</button>
+
 </body>
 <script>
     var ws = new WebSocket("wss://kahootpod.com:443/ws");
+    var kws = new WebSocket("wss://kahootpod.com:443/kws");
 </script>
 </html>

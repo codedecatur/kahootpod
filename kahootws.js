@@ -19,10 +19,12 @@ function kahootws(wss){
                         for(let i of prompts){
                             if(i.prompt === msgJSON.prompt){
                                 i.answers.push({answer: msgJSON.content, totalRating: 0, timesRated: 0, user: msgJSON.user});
-                                
+
                             }
                         }
                         break;
+                    case "admin":
+                        sendPrompt(msgJSON.content);
                 }
             } catch (e) {
                 ws.close();
@@ -33,6 +35,14 @@ function kahootws(wss){
             clients.splice(clients.indexOf(ws), 1);
         })
     })
+
+    function sendPrompt(p){
+        for(let i of clients){
+            i.send(JSON.stringify({type: "prompt", content: p}));
+        }
+    }
+
+
 }
 
 function prompt(s){
