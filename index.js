@@ -8,7 +8,7 @@ const { kahootws } = require("./kahootws");
 
 let app = express();
 app.set('view engine', 'ejs');
-
+app.use( express.static( process.cwd() + "/static" ) );
 app.get("/", (req, res) => {
     res.render("pages/mainPage");
 })
