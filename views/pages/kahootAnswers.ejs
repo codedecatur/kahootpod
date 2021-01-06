@@ -26,7 +26,7 @@
         kws.send(JSON.stringify({type:"admiiiin"}));
     }
 
-    function update(){kws.send("adminUp");}
+    function update(){kws.send(JSON.stringify({type:"adminUp"}));}
 
     setInterval(update, 500);
 </script>
