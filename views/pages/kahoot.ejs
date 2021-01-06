@@ -110,7 +110,7 @@
     }
 
     function answerQuestion(ans){
-        scoped.answers[scoped.currentPrompt] = ans;
+       //scoped.answers[scoped.currentPrompt] = ans;
         scoped.kws.send(JSON.stringify({type: "answer", content: ans, prompt: scoped.currentPrompt, user: "user"}));
     }
 </script>
