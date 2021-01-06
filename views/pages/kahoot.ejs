@@ -45,6 +45,23 @@
         .submission img {
             height: 25px;
         }
+        textarea {
+            font-size: 20px;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button, input[type=button], input[type=submit], input[type=reset] {
+            background-color: #d4a6ff;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            font-size: 18px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
     </style>
 
 </head>
@@ -82,7 +99,7 @@
                     break;
                 case "submissions":
                     for(let i of msgJSON.content.submissions){
-                        document.getElementById("kahoot-answers-container").innerHTML += createSubmissionHTML(i.answer);
+                        document.getElementById("kahoot-answers-container").innerHTML += createSubmissionHTML(i.answer, i.ansId);
                     }
                     break;
             }
@@ -91,10 +108,10 @@
         } 
     }
 
-    function createSubmissionHTML(s){
+    function createSubmissionHTML(s, ansId){
         return `<div class="submission">
             <p>`+s+`</p>
-            <img src="/images/liked.png" onclick="">
+            <img id="ansId`+ansId+`" src="/images/unliked.png" onclick="if(document.getElementById('ansId' + `+ansId+`).src == 'images/unliked.png'){scoped.kws.send(JSON.stringify({type: 'like', ansId: `+ansId+`}));document.getElementById('ansId' + `+ansId+`).src = '/images/liked.png';} else {scoped.kws.send(JSON.stringify({type: 'dislike', ansId: `+ansId+`}));document.getElementById('ansId' + `+ansId+`).src = '/images/unliked.png';}">
         </div>`;
     }
 

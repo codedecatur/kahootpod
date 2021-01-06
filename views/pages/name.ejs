@@ -3,11 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');  
+        body {
+            margin-left: 13%;
+            margin-right: 13%;
+            margin-top: 7%;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+        }
+        #nameBox {
+            margin-bottom: 20px;
+            
+            
+        }
+        input[type=text] {
+            font-size: 20px;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button, input[type=button], input[type=submit], input[type=reset] {
+            background-color: #d4a6ff;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            font-size: 20px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        h1 {
+            /**background-color: #d4a6ff;**/
+        }
+
+    </style>
 </head>
 <body>
-    Please enter your name: 
-    <br>
-    <textarea id="nameBox" style="resize: none;"></textarea>
+    <h1>Please enter your name:</h1>
+    <input type="text" id="nameBox"></input>
     <br>
     <button onclick="ws.send(JSON.stringify({type: 'name', content: document.getElementById('nameBox').value}))">Submit</button>
 </body>

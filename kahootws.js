@@ -23,7 +23,7 @@ function kahootws(wss){
                     case "answer":
                         for(let i of prompts){
                             if(i.prompt === msgJSON.prompt){
-                                i.answers.push({answer: msgJSON.content, totalRating: 0, timesRated: 0, user: msgJSON.user});
+                                i.answers.push({answer: msgJSON.content, totalRating: 0, timesRated: 0, user: msgJSON.user, ansId: i.answers.length});
                             }
                         }
                         break;
@@ -42,6 +42,15 @@ function kahootws(wss){
                         break;
                     case "adminDistSubmissions":
                         distAnswers();
+                        break;
+                    case "recievedAns":
+                        prompts[currentPrompt].answers[msgJSON.ansId].timesRated++;
+                        break;
+                    case "like":
+                        prompts[currentPrompt].answers[msgJSON.ansId].totalRating++;
+                        break;
+                    case "dislike":
+                        prompts[currentPrompt].answers[msgJSON.ansId].totalRating--;
                         break;
                 }
             } catch (e) {
