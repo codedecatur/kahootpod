@@ -134,6 +134,7 @@
     function answerQuestion(ans){
         document.getElementById("answer-container").style = "display: none;"
         document.getElementById("submitted-prompt").style = "display: block;"
+        document.getElementById("answer-input").value = ""
         //scoped.answers[scoped.currentPrompt] = ans;
         scoped.kws.send(JSON.stringify({type: "answer", content: ans, prompt: scoped.currentPrompt, user: document.cookie}));
     }
