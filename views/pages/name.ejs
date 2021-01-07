@@ -43,7 +43,7 @@
         <h1>Please enter your name:</h1>
         <input type="text" id="nameBox"></input>
         <br>
-        <button onclick="submitName()">Submit</button>
+        <button onclick="scoped.submitName()">Submit</button>
     </div>
     <div id="welcome-container" style="display: none;">
         <h2 id="welcome-prompt"></h2>
@@ -53,8 +53,8 @@
     function submitName() {
         ws.send(JSON.stringify({type: 'name', content: document.getElementById('nameBox').value}))
         document.getElementById("welcome-prompt").innerText = "Hello " + document.getElementById('nameBox').value + "!"
-        documnet.getElementById("welcome-container").style = "display: block;"
-        documnet.getElementById("name-container").style = "display: none;"
+        document.getElementById("welcome-container").style = "display: block;"
+        document.getElementById("name-container").style = "display: none;"
     }
 </script>
 </html>
