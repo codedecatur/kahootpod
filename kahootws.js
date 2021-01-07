@@ -61,6 +61,9 @@ function kahootws(wss){
                     case "dislike":
                         prompts[currentPrompt].answers[msgJSON.ansId].totalRating--;
                         break;
+                    case("saveThings"):
+                        sendSaveAns();
+                        break;
                 }
             } catch (e) {
                 ws.close();
@@ -81,6 +84,12 @@ function kahootws(wss){
     function sendAdminsAnswers(){
         for(let i of admins){
             i.send(JSON.stringify({type: "prompts", prompts: prompts, currentPrompt: currentPrompt}));
+        }
+    }
+
+    function sendSaveAns(){
+        for(let i of clients){
+          i.send(JSON.stringify({type:"saveAnswers"}));
         }
     }
 
