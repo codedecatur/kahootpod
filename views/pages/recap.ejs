@@ -39,7 +39,7 @@
     </style>
 
 </head>
-<body>
+<body id="real-body">
     <h1 id="prompt">Which of the choices occurs first in the story?</h1>
     <div class="flex-container" id="larger-container">
         
@@ -106,7 +106,7 @@
 
     function sendScore(){
         ws.send(JSON.stringify({type:"score", content: scoped.score, user: getCookie("username")}));
-        document.body.innerHTML = "<h1 id='prompt'>Your score: "+scoped.score+"</h1>";
+        document.getElementById("real-body").innerHTML = "<h1 id='prompt'>Your score: "+scoped.score+"</h1>";
     }
 
     function loadQuestion(n){
