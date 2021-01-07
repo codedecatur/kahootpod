@@ -99,10 +99,17 @@
         }
     }
 
+    function loadQuestionNormal(n){
+        document.getElementById("button-container").innerHTML = "";
+        for(let i of questions[n]){
+            document.getElementById("button-container").innerHTML += makeButton(i.text, i.action);
+        }
+    }
+
     function makeButton(t, a){
         return `<button onclick='${a}'>${t}</button>`;
     }
 
-    loadQuestion(0);
+    loadQuestionNormal(0);
 </script>
 </html>
