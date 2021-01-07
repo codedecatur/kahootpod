@@ -100,7 +100,8 @@
                     scoped.currentPrompt = msgJSON.content;
                     document.getElementById("prompt").innerText = scoped.currentPrompt;
                     document.getElementById("kahoot-answers-container").innerHTML = "";
-                    document.getElementById("answer-container").style = "display: block;"
+                    document.getElementById("answer-container").style = ""
+                    document.getElementById("submitted-prompt").style = "display: none;"
                     break;
                 case "submissions":
                     document.getElementById("kahoot-answers-container").innerHTML = "";
@@ -132,6 +133,7 @@
 
     function answerQuestion(ans){
         document.getElementById("answer-container").style = "display: none;"
+        document.getElementById("submitted-prompt").style = "display: block;"
         //scoped.answers[scoped.currentPrompt] = ans;
         scoped.kws.send(JSON.stringify({type: "answer", content: ans, prompt: scoped.currentPrompt, user: document.cookie}));
     }
