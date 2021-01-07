@@ -26,6 +26,10 @@ app.get("/admin/bassoon/kahootAns", (req, res) => {
   res.render("pages/kahootAnswers.ejs");
 })
 
+app.get("/admin/bassoon/recapAns", (req, res) => {
+  res.render("pages/viewScores.ejs");
+})
+
 var privateKey = fs.readFileSync( 'privatekey.pem' );
 var certificate = fs.readFileSync( 'certificate.pem' );
 
@@ -66,6 +70,8 @@ function ping(){
 
 setInterval(ping, 1000);
 
+var scores = [];
+
 wss.on('connection', ws => {
   clients.push(ws);
   ws.on('message', message => {
@@ -85,6 +91,11 @@ wss.on('connection', ws => {
         case("getName"):
           ws.send(JSON.stringify({type: "userName", content: ws.userName}));
           break;
+        case("score"):
+          scores.push({user: msgJSON.user, score: msgJSON.content});
+          break;
+        case("getScores"):
+          ws.send(JSON.stringify({type: "scores", scores: scores}));
       }
     } catch(e){
       ws.close();

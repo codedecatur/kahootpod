@@ -52,6 +52,57 @@
     </div>
 </body>
 <script>
-    
+    var score = 0;
+    var curQ = 0;
+
+    var questions = [
+        [
+            {text: "Introduced to the main character, a babysitter", action:"scoped.nextQuestion();"},
+            {text: "Introduced to main character, an old math professor", action:"scoped.score++;scoped.nextQuestion();"},
+            {text: "Introduced to the main character, a babysitter", action:"scoped.nextQuestion();"}
+        ],
+        [
+            {text: "Narrator talks to some clerks and learns his pension has been stolen", action:"scoped.score++;scoped.nextQuestion();"},
+            {text: "A young student confronts the narrator about his teaching style", action:"scoped.nextQuestion();"},
+            {text: "The narrator walks into an old friend he thought was dead", action:"scoped.nextQuestion();"}
+        ],
+        [
+            {text: "The narrator finds a note from his long-lost daughter", action:"scoped.nextQuestion();"},
+            {text: "The narrator is bitten by a radioactive spider", action:"scoped.nextQuestion();"},
+            {text: "The narrator catches up with an old friend he thought was dead", action:"scoped.score++;scoped.nextQuestion();"}
+        ],
+        [
+            {text: "The narrator talks about how his living wife still visits him", action:"scoped.nextQuestion();"},
+            {text: "The narrator talks about how his dead wife still visits him", action:"scoped.score++;scoped.nextQuestion();"},
+            {text: "The narrator talks about how his son recently joined a cult and was put into cell one", action:"scoped.nextQuestion();"}
+        ],
+        [
+            {text: "The narrator begins writing a story", action:"scoped.sendScore();"},
+            {text: "The narrator recalls some parts of his past", action:"scoped.score++;scoped.sendScore();"},
+            {text: "The narrator wakes up", action:"scoped.sendScore();"}
+        ]
+
+    ];
+    function nextQuestion(){
+        scoped.loadQuestion(++scoped.curQ);
+    }
+
+    function sendScore(){
+        ws.send(JSON.stringify({type:"score", content: scoped.score, user: document.cookie}));
+        document.body.innerHTML = "<h1 id='prompt'>Your score: "+scoped.score+"</h1>";
+    }
+
+    function loadQuestion(n){
+        document.getElementById("button-container").innerHTML = "";
+        for(let i of scoped.questions[n]){
+            document.getElementById("button-container").innerHTML += scoped.makeButton(i.text, i.action);
+        }
+    }
+
+    function makeButton(t, a){
+        return `<button onclick='${a}'>${t}</button>`;
+    }
+
+    loadQuestion(0);
 </script>
 </html>
