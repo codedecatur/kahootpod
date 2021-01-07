@@ -15,7 +15,7 @@
             var msgJSON = JSON.parse(e.data);
             switch(msgJSON.type){
                 case "scores":
-                document.body.innerHTML = msgJSON.scores;
+                document.body.innerHTML = JSON.stringify(msgJSON.scores);
             }
         }
         catch(e){
