@@ -54,7 +54,7 @@ server.on('upgrade', function upgrade(request, socket, head) {
 
 var clients = [];
 
-var currentPage = "name";
+var currentPage = "game";
 
 kahootws(kWss);
 

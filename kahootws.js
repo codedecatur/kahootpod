@@ -4,10 +4,12 @@ const WebSocket = require("ws");
 
 function kahootws(wss){
     var prompts = [
-        new prompt("Is Ikenna actually dead? What is the significance of if he is or not? Does it matter?"), 
-        new prompt("How does the state of the narrator's external environment reflect their internal environment? Consider how the narrator considers his own mental state, and how all of the characters consider the state of their country."),
-        new prompt("What do you think the “ghosts” mean in the story?"),
-        new prompt("What is the purpose of the first person perspective used in the story?")
+        new prompt("What is the purpose of the first person perspective used in the story?"),
+        new prompt("Why is so much of the story focused on the past?"),
+        new prompt("What is the purpose of sand in the story? What does it mean why James says that he wouldn’t have thrown sand at Ikenna even if he could have?"),
+        new prompt("How does the state of the narrator's external environment reflect their internal environment? Consider how the narrator considers his own mental state (“I often want to tell Nkiru that her mother visits weekly… but if I do, she will finally have reason to come here and bundle me back with her to America”), and how all of the characters consider the state of their country."),
+        new prompt("Nkiru’s (James Nyowe’s surviving daughter) name means “the greatest will come”. When James interacts with her, he withholds information about how he is visited by his wife and considers her American accent “troubling”. How do James’s interactions with her build onto the ideas of him as an unreliable narrator?")
+
     ];
 
     var clients = [];
@@ -88,8 +90,8 @@ function kahootws(wss){
         var randUsed = [];
         for(let i of clients){
             var obj = {type: "submissions", content: {submissions: []}};
+            var randUsedLocal = [];
             for(var j = 0; j < numSubs; j++){
-                var randUsedLocal = [];
                 if(randUsed.length == prompts[currentPrompt].answers.length){
                     randUsed = [];
                 }

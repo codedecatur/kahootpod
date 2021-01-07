@@ -33,6 +33,7 @@
                     break;
                 case "userName":
                     userName = msgJSON.content;
+                    document.cookie = userName;
                     break;
             }
         } catch(e){

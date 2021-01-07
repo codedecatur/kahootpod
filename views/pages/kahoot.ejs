@@ -68,6 +68,7 @@
 <body>
     <div id="kahoot-prompt-container">
         <h1 id="prompt"></h1>
+        <h3 id="submitted-prompt">Answer submitted</h3>
         <div class="flex-container" id="answer-container">
             <textarea id="answer-input" name="answer-input" style="resize: none;"></textarea>
             <button onclick="scoped.answerQuestion(document.getElementById('answer-input').value)">Submit Answer</button>
@@ -99,6 +100,7 @@
                     scoped.currentPrompt = msgJSON.content;
                     document.getElementById("prompt").innerText = scoped.currentPrompt;
                     document.getElementById("kahoot-answers-container").innerHTML = "";
+                    document.getElementById("answer-container").style = "display: block;"
                     break;
                 case "submissions":
                     document.getElementById("kahoot-answers-container").innerHTML = "";
@@ -129,8 +131,9 @@
     }
 
     function answerQuestion(ans){
-       //scoped.answers[scoped.currentPrompt] = ans;
-        scoped.kws.send(JSON.stringify({type: "answer", content: ans, prompt: scoped.currentPrompt, user: userName}));
+        document.getElementById("answer-container").style = "display: none;"
+        //scoped.answers[scoped.currentPrompt] = ans;
+        scoped.kws.send(JSON.stringify({type: "answer", content: ans, prompt: scoped.currentPrompt, user: document.cookie}));
     }
 </script>
 </html>
