@@ -43,14 +43,13 @@
     <div id="real-body">
         <h1 id="prompt">Which of the choices occurs first in the story?</h1>
         <div class="flex-container" id="larger-container">
-        
-        <div class="flex-container" id="button-container">
-            <button>What is the purpose of the first person perspective used in the story?</button>
-            <button>Why is so much of the story focused on the past?</button>
-            <button>How does the state of the narrator's external environment reflect their internal environment? Consider how the narrator considers his own mental state (“I often want to tell Nkiru that her mother visits weekly… but if I do, she will finally have reason to come here and bundle me back with her to America”), and how all of the characters consider the state of their country.
-            </button>
+            <div class="flex-container" id="button-container">
+                <button>What is the purpose of the first person perspective used in the story?</button>
+                <button>Why is so much of the story focused on the past?</button>
+                <button>How does the state of the narrator's external environment reflect their internal environment? Consider how the narrator considers his own mental state (“I often want to tell Nkiru that her mother visits weekly… but if I do, she will finally have reason to come here and bundle me back with her to America”), and how all of the characters consider the state of their country.
+                </button>
+            </div>
         </div>
-    </div>
     </div>
 </body>
 <script>
@@ -108,7 +107,7 @@
 
     function sendScore(){
         ws.send(JSON.stringify({type:"score", content: scoped.score, user: getCookie("username")}));
-        document.body.innerHTML = "<h1 id='prompt'>Your score: "+scoped.score+"</h1>";
+        document.getElementById("real-body").innerHTML = "<h1 id='prompt'>Your score: "+scoped.score+"</h1>";
     }
 
     function loadQuestion(n){
