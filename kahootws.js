@@ -12,6 +12,8 @@ function kahootws(wss){
 
     ];
 
+    setInterval(ping, 1000);
+
     var clients = [];
     var admins = [];
 
@@ -69,6 +71,12 @@ function kahootws(wss){
             clients.splice(clients.indexOf(ws), 1);
         })
     })
+
+    function ping(){
+        for(let i of clients){
+            i.send(JSON.stringify({type:"ping"}));
+        }
+    }
 
     function sendAdminsAnswers(){
         for(let i of admins){

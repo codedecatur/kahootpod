@@ -110,6 +110,9 @@
                         document.getElementById("kahoot-answers-container").appendChild(createSubmissionHTML(i.answer, i.ansId));
                     }
                     break;
+                case "ping":
+                    scoped.kws.send(JSON.stringify({type: "srygyudfyu"}));
+                    break;
             }
         } catch (e) {
             scoped.kws.close();

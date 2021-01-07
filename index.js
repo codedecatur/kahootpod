@@ -58,6 +58,14 @@ var currentPage = "game";
 
 kahootws(kWss);
 
+function ping(){
+  for(let i of clients){
+    i.send(JSON.stringify({type: "ping"}))
+  }
+}
+
+setInterval(ping, 1000);
+
 wss.on('connection', ws => {
   clients.push(ws);
   ws.on('message', message => {
