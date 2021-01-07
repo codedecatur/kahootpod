@@ -55,6 +55,10 @@
 </body>
 <script>
     function submitName() {
+        var userName = document.getElementById('nameBox').value
+        if(document.cookie == ""){
+            document.cookie = "username=" + userName;
+        }
         ws.send(JSON.stringify({type: 'name', content: document.getElementById('nameBox').value}));
         document.getElementById("welcome-prompt").innerText = "Hello " + document.getElementById('nameBox').value + "!";
         document.getElementById("welcome-container").style = "display: block;";
