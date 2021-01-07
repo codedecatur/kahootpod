@@ -80,7 +80,7 @@
     </div>
 </body>
 <script>
-    let answers = {}
+    var answers = {};
 
     var kws = new WebSocket("wss://kahootpod.com:443/kws");
 
@@ -135,11 +135,31 @@
     }
 
     function answerQuestion(ans){
-        document.getElementById("answer-container").style = "display: none;"
-        document.getElementById("submitted-prompt").style = "display: block;"
-        document.getElementById("answer-input").value = ""
-        //scoped.answers[scoped.currentPrompt] = ans;
+        document.getElementById("answer-container").style = "display: none;";
+        document.getElementById("submitted-prompt").style = "display: block;";
+        document.getElementById("answer-input").value = "";
+        scoped.answers[scoped.currentPrompt] = ans;
         scoped.kws.send(JSON.stringify({type: "answer", content: ans, prompt: scoped.currentPrompt, user: document.cookie}));
+    }
+
+    function saveAnswers(){
+        var s = "";
+        for(let i of scoped.answers){
+            
+        }
+    }
+
+    function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
     }
 </script>
 </html>
