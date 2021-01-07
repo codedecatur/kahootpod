@@ -35,6 +35,9 @@
         h1 {
             /**background-color: #d4a6ff;**/
         }
+        #welcome-prompt {
+            font-size: 2.2em;
+        }
 
     </style>
 </head>
@@ -46,15 +49,16 @@
         <button onclick="scoped.submitName()">Submit</button>
     </div>
     <div id="welcome-container" style="display: none;">
-        <h2 id="welcome-prompt"></h2>
+        <h1 id="welcome-prompt"></h1>
+        <h1>Waiting for teacher input</h1>
     </div>
 </body>
 <script>
     function submitName() {
-        ws.send(JSON.stringify({type: 'name', content: document.getElementById('nameBox').value}))
-        document.getElementById("welcome-prompt").innerText = "Hello " + document.getElementById('nameBox').value + "!"
-        document.getElementById("welcome-container").style = "display: block;"
-        document.getElementById("name-container").style = "display: none;"
+        ws.send(JSON.stringify({type: 'name', content: document.getElementById('nameBox').value}));
+        document.getElementById("welcome-prompt").innerText = "Hello " + document.getElementById('nameBox').value + "!";
+        document.getElementById("welcome-container").style = "display: block;";
+        document.getElementById("name-container").style = "display: none;";
     }
 </script>
 </html>
