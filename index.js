@@ -96,6 +96,8 @@ wss.on('connection', ws => {
           break;
         case("getScores"):
           ws.send(JSON.stringify({type: "scores", scores: scores}));
+          break;
+
       }
     } catch(e){
       ws.close();
@@ -105,6 +107,12 @@ wss.on('connection', ws => {
     clients.splice(clients.indexOf(ws), 1);
   })
 });
+
+function sendSaveScores(){
+  for(let i of clients){
+    
+  }
+}
 
 function sendToAll(s){
   for(let i of clients){

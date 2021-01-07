@@ -113,6 +113,9 @@
                 case "ping":
                     scoped.kws.send(JSON.stringify({type: "srygyudfyu"}));
                     break;
+                case "saveAnswers":
+                    scoped.saveAnswers();
+                    break;
             }
         } catch (e) {
             scoped.kws.close();
@@ -133,20 +136,38 @@
     kws.onopen = (e) => {
         kws.send(JSON.stringify({type: "updateReq", content: ""}));
     }
-
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
     function answerQuestion(ans){
         document.getElementById("answer-container").style = "display: none;";
         document.getElementById("submitted-prompt").style = "display: block;";
         document.getElementById("answer-input").value = "";
         scoped.answers[scoped.currentPrompt] = ans;
-        scoped.kws.send(JSON.stringify({type: "answer", content: ans, prompt: scoped.currentPrompt, user: document.cookie}));
+        scoped.kws.send(JSON.stringify({type: "answer", content: ans, prompt: scoped.currentPrompt, user: scoped.getCookie("username")}));
     }
 
     function saveAnswers(){
         var s = "";
-        for(let i of scoped.answers){
-            
+        var keys = Object.keys(scoped.answers);
+
+        for(let i of keys){
+            s += i + "\n\n" + scoped.answers[i] + "\n\n----------------\n";
         }
+
+        scoped.download("LPStuff", s);
     }
 
     function download(filename, text) {

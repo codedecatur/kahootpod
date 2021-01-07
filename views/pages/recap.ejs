@@ -88,9 +88,24 @@
     function nextQuestion(){
         scoped.loadQuestion(++scoped.curQ);
     }
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
 
     function sendScore(){
-        ws.send(JSON.stringify({type:"score", content: scoped.score, user: document.cookie}));
+        ws.send(JSON.stringify({type:"score", content: scoped.score, user: getCookie("username")}));
         document.body.innerHTML = "<h1 id='prompt'>Your score: "+scoped.score+"</h1>";
     }
 

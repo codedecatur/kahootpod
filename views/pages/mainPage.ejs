@@ -39,10 +39,13 @@
                     try{scoped.loadQuestion = loadQuestion}catch(e){};
                     try{scoped.makeButton = makeButton}catch(e){};
                     try{scoped.answers = answers}catch(e){};
+                    try{scoped.saveAnswers = saveAnswers}catch(e){};
+                    try{scoped.download = download}catch(e){};
+                    try{scoped.getCookie = getCookie}catch(e){};
                     break;
                 case "userName":
                     userName = msgJSON.content;
-                    document.cookie = userName;
+                    document.cookie = "username=" + userName;
                     break;
                 case "ping":
                     ws.send(JSON.stringify({type:"fdsukb"}));
