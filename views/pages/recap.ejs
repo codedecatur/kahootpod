@@ -4,37 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-
-        body {
+    body {
             margin-left: 13%;
             margin-right: 13%;
             margin-top: 7%;
             text-align: center;
             font-family: 'Roboto', sans-serif;
+            
         }
         .flex-container {
             display: flex;
+        }
+        #button-container {
+            justify-content: center;
+            flex-direction: column;
+            width: 80%;
+        }
+        #larger-container {
+            justify-content: center;
         }
         button, input[type=button], input[type=submit], input[type=reset] {
             border: none;
             padding: 5px 10px;
             font-size: 20px;
             text-decoration: none;
-            margin: 4px 2px;
+            margin: 15px 2px;
             cursor: pointer;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+        #prompt {
+            text-decoration: underline;
         }
     </style>
 
 </head>
 <body>
-    <div class="flex-container">
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
+    <h1 id="prompt">Which of the choices occurs first in the story?</h1>
+    <div class="flex-container" id="larger-container">
+        
+        <div class="flex-container" id="button-container">
+            <button>What is the purpose of the first person perspective used in the story?</button>
+            <button>Why is so much of the story focused on the past?</button>
+            <button>How does the state of the narrator's external environment reflect their internal environment? Consider how the narrator considers his own mental state (“I often want to tell Nkiru that her mother visits weekly… but if I do, she will finally have reason to come here and bundle me back with her to America”), and how all of the characters consider the state of their country.
+            </button>
+        </div>
     </div>
 </body>
 <script>
-    getName();
     
 </script>
 </html>
